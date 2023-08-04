@@ -8,6 +8,8 @@ function generateGrid(size) {
 	for (let j = 0; j < size; ++j) {
 	    const gridSquare = document.createElement('div');
 	    gridSquare.classList.toggle('gridsquare');
+	    gridSquare.setAttribute('draggable', 'false');
+	    gridSquare.setAttribute('ondragstart', 'return false');
 	    gridSquare.addEventListener('mouseover', colorSquare);
 	    gridSquare.addEventListener('mousedown', colorSquare);
 	    row.appendChild(gridSquare);
