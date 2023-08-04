@@ -20,3 +20,6 @@ function colorSquare(event) {
     }
 }
 
+// size button
+const sizeBtn = document.querySelector('#size-btn');
+sizeBtn.addEventListener('click', generateGrid);
