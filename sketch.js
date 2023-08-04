@@ -1,16 +1,26 @@
-// generate the 16x16 grid (with flexbox css)
-const container = document.querySelector('#app');
-for (let i = 0; i < 16; ++i) {
-    const row = document.createElement('div');
-    row.classList.toggle('row');
-    for (let j = 0; j < 16; ++j) {
-	const gridSquare = document.createElement('div');
-	gridSquare.classList.toggle('gridsquare');
-	gridSquare.addEventListener('mouseover', colorSquare);
-	gridSquare.addEventListener('mousedown', colorSquare);
-	row.appendChild(gridSquare);
+const DEFAULT_SIZE = 16;
+
+function generateGrid(size) {
+    const container = document.querySelector('#app');
+    for (let i = 0; i < size; ++i) {
+	const row = document.createElement('div');
+	row.classList.toggle('row');
+	for (let j = 0; j < size; ++j) {
+	    const gridSquare = document.createElement('div');
+	    gridSquare.classList.toggle('gridsquare');
+	    gridSquare.addEventListener('mouseover', colorSquare);
+	    gridSquare.addEventListener('mousedown', colorSquare);
+	    row.appendChild(gridSquare);
+	}
+	container.appendChild(row);
     }
-    container.appendChild(row);
+}
+
+function clearGrid() {
+    const container = document.querySelector('#app');
+    while (container.firstChild) {
+	container.removeChild(container.lastChild);
+    }
 }
 
 function colorSquare(event) {
@@ -20,6 +30,15 @@ function colorSquare(event) {
     }
 }
 
-// size button
+function setSize() {
+    const size = prompt("Set the size of the grid (max 100)");
+    if (size > 100 || isNaN(size)) return;
+    clearGrid();
+    generateGrid(size);
+}
+
 const sizeBtn = document.querySelector('#size-btn');
-sizeBtn.addEventListener('click', generateGrid);
+sizeBtn.addEventListener('click', setSize);
+
+generateGrid(DEFAULT_SIZE);
+
